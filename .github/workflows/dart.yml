@@ -1,4 +1,4 @@
-name: Flutter CI
+name: Flutter Android CI
 
 on:
   push:
@@ -11,25 +11,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      # 1️⃣ Checkout repository
+      - name: Checkout
+        uses: actions/checkout@v4
 
+      # 2️⃣ Set up Flutter 3.13.0
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.35.3' # or your version
+          flutter-version: '3.13.0'
 
-      - name: Install dependencies
+      # 3️⃣ Install dependencies
+      - name: Get dependencies
         run: flutter pub get
 
-      # Run analyzer but ignore warnings (only fail on errors)
-      - name: Analyze (fail on errors only)
-        run: |
-          flutter analyze --no-fatal-warnings --no-fatal-infos
+      # 4️⃣ Analyze code (fail on errors only)
+      - name: Analyze code
+        run: flutter analyze --no-fatal-warnings --no-fatal-infos
 
+      # 5️⃣ Build Android APK
       - name: Build APK
         run: flutter build apk --release
 
-      - name: Upload APK artifact
+      # 6️⃣ Upload APK artifact
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: app-release-apk
