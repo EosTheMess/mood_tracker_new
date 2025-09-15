@@ -16,7 +16,7 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.36.0'  # Use a fixed version to avoid surprises
+          flutter-version: 'stable'  # Use a fixed version to avoid surprises
 
       - name: Set up JDK
         uses: actions/setup-java@v3
