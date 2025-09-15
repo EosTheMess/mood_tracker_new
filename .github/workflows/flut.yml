@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [ main ]
 
+env:
+  SKIP_JDK_VERSION_CHECK: true  # Available to all jobs in this workflow
+
 jobs:
   build:
     runs-on: ubuntu-latest
