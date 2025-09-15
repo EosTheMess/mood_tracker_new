@@ -16,7 +16,7 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.35.3'  # This should work now
+          flutter-version: '3.35.3-x64'  # This should work now
 
       - name: Show Flutter version
         run: flutter --version
