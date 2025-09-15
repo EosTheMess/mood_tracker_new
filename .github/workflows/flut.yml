@@ -18,18 +18,21 @@ jobs:
         with:
           flutter: stable
 
+      - name: Show Flutter version
+        run: flutter --version
+
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '11'
 
-      - name: Set up Android SDK
+      - name: Setup Android SDK
         uses: android-actions/setup-android@v3
 
       - name: Accept Android licenses
         run: |
-          yes | sdkmanager --licenses
+          flutter doctor --android-licenses --verbose
 
       - name: Run Flutter doctor
         run: flutter doctor -v
