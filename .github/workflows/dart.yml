@@ -16,7 +16,7 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.35.3-x64'  # This should work now
+          flutter-version: 'stable'
 
       - name: Show Flutter version
         run: flutter --version
@@ -27,10 +27,11 @@ jobs:
           distribution: 'temurin'
           java-version: '11'
 
-      - name: Install Android SDK
+      - name: Install Android SDK and tools
         run: |
           sudo apt-get update
           sudo apt-get install -y android-sdk
+          sdkmanager "platform-tools" "platforms;android-33" "build-tools;33.0.0"
 
       - name: Accept Android licenses
         run: |
@@ -40,8 +41,17 @@ jobs:
       - name: Run Flutter doctor
         run: flutter doctor -v
 
+      - name: Clean project (force rebuild)
+        run: flutter clean
+
       - name: Get dependencies
         run: flutter pub get
 
-      - name: Build APK
-        run: flutter build apk --release --verbose
+      - name: Force build APK
+        run: flutter build apk --release --no-build-cache --verbose
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: release-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
