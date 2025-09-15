@@ -42,7 +42,7 @@ jobs:
         run: flutter pub get
 
       - name: Build APK
-        run: flutter build apk --release --debug
+        run: flutter build apk --debug
 
       - name: List APK output
         run: ls -lh build/app/outputs/flutter-apk/
