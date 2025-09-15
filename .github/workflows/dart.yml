@@ -16,7 +16,10 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: 'stable'  # Use a fixed version to avoid surprises
+          flutter-version: 'stable'  # This should work now
+
+      - name: Show Flutter version
+        run: flutter --version
 
       - name: Set up JDK
         uses: actions/setup-java@v3
@@ -24,16 +27,21 @@ jobs:
           distribution: 'temurin'
           java-version: '11'
 
+      - name: Install Android SDK
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y android-sdk
+
       - name: Accept Android licenses
         run: |
-          yes | sdkmanager --licenses
-          flutter doctor --android-licenses
+          yes | sdkmanager --licenses || true
+          flutter doctor --android-licenses --verbose
 
       - name: Run Flutter doctor
-        run: flutter doctor
+        run: flutter doctor -v
 
       - name: Get dependencies
         run: flutter pub get
 
       - name: Build APK
-        run: flutter build apk --release
+        run: flutter build apk --release --verbose
