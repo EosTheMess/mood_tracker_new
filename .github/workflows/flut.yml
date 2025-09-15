@@ -18,7 +18,7 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.35.3'  # Using the version from your logs
+          flutter-version: '3.35.3'
 
       - name: Show Flutter version
         run: flutter --version
@@ -30,8 +30,7 @@ jobs:
           java-version: '17'
 
       - name: Accept Android licenses
-        run: |
-          flutter doctor --android-licenses --verbose
+        run: yes | flutter doctor --android-licenses
 
       - name: Run Flutter doctor
         run: flutter doctor -v
@@ -42,8 +41,11 @@ jobs:
       - name: Get dependencies
         run: flutter pub get
 
-      - name: Force build APK
-        run: flutter build apk --release --no-build-cache --verbose
+      - name: Build APK
+        run: flutter build apk --release
+
+      - name: List APK output
+        run: ls -lh build/app/outputs/flutter-apk/
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
