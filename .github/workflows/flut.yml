@@ -6,29 +6,28 @@ on:
   pull_request:
     branches: [ main ]
 
-env:
-  SKIP_JDK_VERSION_CHECK: true  # Available to all jobs in this workflow
-
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      SKIP_JDK_VERSION_CHECK: true
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Dart & Flutter
-        uses: dart-lang/setup-dart@v1
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
         with:
-          flutter: stable
+          flutter-version: '3.35.3'  # Using the version from your logs
 
-      - name: Set up JDK
+      - name: Show Flutter version
+        run: flutter --version
+
+      - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '11'
-
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
+          java-version: '17'
 
       - name: Accept Android licenses
         run: |
@@ -49,5 +48,4 @@ jobs:
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: release-apk
-          path: build/app/outputs/flutter-apk/app-release.apk
+          name
