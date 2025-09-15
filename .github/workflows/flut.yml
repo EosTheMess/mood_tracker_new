@@ -18,9 +18,6 @@ jobs:
         with:
           flutter: stable
 
-      - name: Show Flutter version
-        run: flutter --version
-
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
