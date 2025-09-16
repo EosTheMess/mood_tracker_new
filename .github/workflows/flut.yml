@@ -42,7 +42,7 @@ jobs:
         run: flutter pub get
 
       - name: Fix errors
-        run: sudo apt-get install -y libgtk-3-dev mesa-utilsrun
+        run: sudo apt-get install -y libgtk-3-dev mesa-utils
 
       - name: Build APK
         run: flutter build apk --release
