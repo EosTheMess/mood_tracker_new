@@ -45,7 +45,7 @@ jobs:
         run: sudo apt-get install -y libgtk-3-dev mesa-utils
 
       - name: Build APK
-        run: flutter build apk --release
+        run: flutter build apk --debug
 
       - name: List APK output
         run: ls -lh build/app/outputs/flutter-apk/
@@ -54,4 +54,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: release-apk
-          path: build/app/outputs/flutter-apk/app-release.apk
+          path: build/app/outputs/flutter-apk/app-debug.apk
