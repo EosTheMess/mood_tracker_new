@@ -14,12 +14,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.'1.8'
-        targetCompatibility = JavaVersion.'1.8'
+        sourceCompatibility = JavaVersion.VERSION_1.8
+        targetCompatibility = JavaVersion.VERSION_1.8
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.'1.8'
+        jvmTarget = JavaVersion.VERSION_1.8
     }
 
     defaultConfig {
